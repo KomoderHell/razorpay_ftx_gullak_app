@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_deposit_history.*
+import kotlinx.android.synthetic.main.fragment_withdraw_history.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +38,15 @@ class WithdrawHistoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_withdraw_history, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val accountModel = activity?.intent?.getSerializableExtra("account") as? AccountModel
+        val withdrawHistoryAdapter = accountModel?.withdraws?.let { WithdrawHistoryAdapter(it) }
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerWithraws.adapter = withdrawHistoryAdapter
+        recyclerWithraws.layoutManager = layoutManager
     }
 
 

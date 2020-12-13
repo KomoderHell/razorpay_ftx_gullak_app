@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_deposit_history.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +37,15 @@ class DepositHistoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_deposit_history, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val accountModel = activity?.intent?.getSerializableExtra("account") as? AccountModel
+        val depositHistoryAdapter = accountModel?.deposits?.let { DepositHistoryAdapter(it) }
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerDeposits.adapter = depositHistoryAdapter
+        recyclerDeposits.layoutManager = layoutManager
     }
 
     companion object {

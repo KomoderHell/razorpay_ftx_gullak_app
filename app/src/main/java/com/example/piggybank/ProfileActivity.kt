@@ -14,6 +14,11 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        val accountModel = intent.getSerializableExtra("account") as? AccountModel
+        textViewBalance.text = "₹" + accountModel?.getBalance().toString()
+        textViewDeposited.text = "₹" + accountModel?.getDeposit().toString()
+        textViewWithdrawal.text = "₹" + accountModel?.getWithdraw().toString()
+
         historyPagerAdapter = HistoryPagerAdapter(supportFragmentManager)
         val depositHistoryFragment = DepositHistoryFragment()
         val withdrawHistoryFragment = WithdrawHistoryFragment()
@@ -28,9 +33,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     inner class HistoryPagerAdapter(fm: FragmentManager?) :
-        FragmentPagerAdapter(fm!! , FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        FragmentPagerAdapter(fm!!, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private val fragmentList: ArrayList<Fragment> = ArrayList()
-        private val title= arrayOf<String>("Deposits","Withdraws")
+        private val title = arrayOf<String>("Deposits", "Withdraws")
 
         override fun getItem(i: Int): Fragment {
             return fragmentList[i]
@@ -40,7 +45,7 @@ class ProfileActivity : AppCompatActivity() {
             return fragmentList.size
         }
 
-        fun addFragment( fragment: Fragment) {
+        fun addFragment(fragment: Fragment) {
             fragmentList.add(fragment)
         }
 

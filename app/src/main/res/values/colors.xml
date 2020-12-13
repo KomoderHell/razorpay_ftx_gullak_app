@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorPrimaryDarkFaded">#E63700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="Red">#FF0000</color>
+    <color name="Yellow">#FFFF00</color>
+    <color name="Green">#00FF00</color>
 </resources>
